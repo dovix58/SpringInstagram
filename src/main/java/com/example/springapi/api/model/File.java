@@ -3,7 +3,7 @@ package com.example.springapi.api.model;
 import jakarta.persistence.*;
 
 @Entity
-public class File {
+public class   File {
 
 
     @Id
@@ -12,10 +12,9 @@ public class File {
     private Long id;
     //id pagrindinis
 
-    private Integer id;
     private String name;
 
-    public File(Integer id, String name) {
+    public File(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -23,7 +22,7 @@ public class File {
     public File() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -31,7 +30,7 @@ public class File {
         return name;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

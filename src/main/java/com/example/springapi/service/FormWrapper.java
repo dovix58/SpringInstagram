@@ -7,23 +7,11 @@ public class FormWrapper {
 
         private MultipartFile image;
         private String name;
-        private Integer id;
+        private Long id;
 
-    public FormWrapper(MultipartFile image, String name, Integer id) {
+    public FormWrapper(MultipartFile image, String name, Long id) {
         this.image = image;
         this.name = name;
-        this.id = id;
-    }
-
-    public void setImage(MultipartFile image) {
-        this.image = image;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -35,9 +23,19 @@ public class FormWrapper {
         return name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

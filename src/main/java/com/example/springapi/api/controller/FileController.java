@@ -1,15 +1,16 @@
 package com.example.springapi.api.controller;
 
 import com.example.springapi.api.model.File;
+import com.example.springapi.api.model.User;
 import com.example.springapi.dao.FileRepo;
+import com.example.springapi.dao.UserRepo;
 import com.example.springapi.service.FileService;
 import com.example.springapi.service.FormWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,17 +24,32 @@ public class FileController {
     private final FileRepo fileRepo;
 
 
+   Logger log =  LoggerFactory.getLogger(this.getClass());
+
+
     public FileController(FileService fileService, FileRepo fileRepo) {
         this.fileService = fileService;
         this.fileRepo = fileRepo;
+
+
+//        User user = new User();
+//        user.setName("Mantas");
+//        user.setId(1234L);
+//        userRepo.save(user);
+//
+//        User noob = new User();
+//        noob.setName("Dovydas");
+//        noob.setId(69420L);
+//        userRepo.save(noob);
     }
+
+
 
     @GetMapping
     public List<File> getFiles(){
         return fileRepo.findAll();
     }
 
-    record newFileRequest(String name, Integer id){}
 
 //    @PostMapping
 //    public void addFile(@RequestBody newFileRequest request){
@@ -78,7 +94,7 @@ public class FileController {
 //}
 
     @PostMapping("/upload")
-    public ResponseEntity<?> multiUploadFileModel(@ModelAttribute FormWrapper model) {
+    public ResponseEntity<String> multiUploadFileModel(@ModelAttribute FormWrapper model) {
         //klaustukas idfk
         //@Valid
         //@Required
@@ -90,10 +106,9 @@ public class FileController {
 //        }
 
         try {
-//            log.debu.model.toString();
+
             File file = new File();
             file.setName(model.getName());
-            file.setId(model.getId());
             fileRepo.save(file);
             fileService.saveImage(model.getImage());
         } catch (IOException e) {
